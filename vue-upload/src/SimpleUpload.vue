@@ -56,12 +56,21 @@ export default {
         }
   },
 
-  methods: {
-      selectFile() {
-          this.file=this.$refs.file.files[0];
-          this.error  = false;
-          this.message = "";
-      },
+    methods: {
+        selectFile() {
+            const file = this.$refs.file.files[0];
+            const allowedTypes = ["application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"];
+            const MAX_SIZE = 10000;
+            const toolarge = file.size > MAX_SIZE;
+            if(allowedTypes.includes(file.type)&& !toolarge){
+                this.file = file;
+                this.error  = false;
+                this.message = "";
+            } else{
+                this.error = true;
+                this.message = toolarge ? `Too large. Max size is ${MAX_SIZE/1000}Kb` :"Only xlsx files types are allowed";
+            }
+        },
 
       async sendFile() {
           const formData = new FormData();
