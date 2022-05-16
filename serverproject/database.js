@@ -7,5 +7,5 @@ module.exports = () => {
         useUnifiedTopology: true,
         useCreateIndex: true,
         useFindAndModify: true,
-    }).then(() => console.log('Connected to Mongodb......'));
+    }).then(() => console.log('Connected to Mongodb...'));
 }

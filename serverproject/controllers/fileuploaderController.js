@@ -26,10 +26,16 @@ const singleFileUpload = async (req, res, next) => {
          // call a function to save the data in a json file
             return parsedData;
         }
-        const file = new SingleFile({
-            row : convertExcelFileToJsonUsingXlsx()
-        });
-        await file.save();
+        for(var i=0;i<convertExcelFileToJsonUsingXlsx().length;i++){
+            const file = new SingleFile({
+                _id: convertExcelFileToJsonUsingXlsx()[i]._id,
+                name: convertExcelFileToJsonUsingXlsx()[i].name,
+                email: convertExcelFileToJsonUsingXlsx()[i].email,
+                age: convertExcelFileToJsonUsingXlsx()[i].age
+            });
+            console.log(file);
+            await file.save();
+        }
         
         res.status(201).send('File Uploaded Successfully');
         //console.log(req.file);
