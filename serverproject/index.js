@@ -1,5 +1,6 @@
 'use strict';
 const express = require('express');
+const mongoose = require('mongoose')
 const path = require('path');
 const cors = require('cors');
 const bodyParser = require('body-parser');
@@ -15,5 +16,6 @@ app.use(bodyParser.json());
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.use('/', fileRoutes.routes);
+
 
 app.listen(port, () => console.log(`server is listening on url http://localhost:${port}`));

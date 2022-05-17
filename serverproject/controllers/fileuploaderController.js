@@ -1,7 +1,7 @@
 'use strict';
 const SingleFile = require('../models/singlefile');
 const xlsx = require('xlsx');
-var fs = require('fs');
+//var fs = require('fs');
 
 const singleFileUpload = async (req, res, next) => {
     try{
@@ -44,16 +44,6 @@ const singleFileUpload = async (req, res, next) => {
     }
 }
 
-const getallSingleFiles = async (req, res, next) => {
-    try{
-        const files = await SingleFile.find();
-        res.status(200).send(files);
-    }catch(error) {
-        res.status(400).send(error.message);
-    }
-}
-
 module.exports = {
-    singleFileUpload,
-    getallSingleFiles,
+    singleFileUpload
 }

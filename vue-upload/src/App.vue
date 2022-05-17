@@ -3,6 +3,8 @@
     <div class="container">
       <SimpleUpload />
       <hr>
+      <h1><center>Data is Displayed here...</center></h1>
+      <hr>
       <DisplayData/>
     </div>
     
@@ -16,7 +18,7 @@ import DisplayData from './components/DisplayData.vue';
 
 export default {
     name: "App",
-    components: { SimpleUpload, DisplayData },
+    components: { SimpleUpload,DisplayData},
     
 }
 </script>
