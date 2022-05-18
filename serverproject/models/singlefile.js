@@ -8,4 +8,6 @@ const singleFileSchema = new Schema({
    age:Number
 });
 
-module.exports = mongoose.model('SingleFile', singleFileSchema);
+const userDB = mongoose.model('SingleFile', singleFileSchema);
+
+module.exports = userDB;

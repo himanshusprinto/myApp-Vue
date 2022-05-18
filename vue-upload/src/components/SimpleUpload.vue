@@ -48,14 +48,7 @@ export default {
             file: "",
             message: "",
             error: false,
-            list:[]
             }
-    },
-
-    async mounted(){
-        var response = await axios.get('http://localhost:8001/displayData')
-        //console.log(response.data);
-        this.list = response.data;
     },
 
     methods: {
