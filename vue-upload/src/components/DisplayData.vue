@@ -1,5 +1,5 @@
 <template>
-    <table id="firstTable">
+    <table class="table is-bordered is-striped is-hoverable is-fullwidth">
     <thead>
         <tr>
         <th>ID</th>
@@ -17,6 +17,17 @@
         </tr>
     </tbody>
     </table>
+    <div class="field is-grouped">
+        <div class="control">
+            <input v-model = "ID" class="input is-info" type="text" placeholder="Input ID">
+        </div>
+        <div class="control">
+            <button v-on:click = "deleteUser" class="button is-danger is-outlined">Delete</button>
+        </div>
+        <div class = "control" v-if="message" :class="`message ${error ? 'is-danger' : 'is-success'}`">
+            <div class="message-body">{{message}}</div>
+        </div>
+    </div>
 </template>
 
 
@@ -28,26 +39,40 @@ export default {
 
     data() {
         return {
-            list:[]
+            list:[],
+            ID :'',
+            message:"",
+            error:false
             }
     },
 
-    async beforeCreate(){
+    async mounted(){
         var response = await axios.get('http://localhost:8000/displayData')
         //console.log(response.data);
         this.list = response.data;
     },
+
+    methods: {
+        async deleteUser () {
+
+            try{
+                var response = await axios.post(`/deleteUser/${this.ID}`)
+                this.message  = response.data.message;
+                this.error = false;
+            }catch(err){
+                this.message = err.response.data.message;
+                this.error = true;
+            }
+        }
+    }
 
     
 }
 </script>
 
 <style>
-    table {
-    font-family: 'Open Sans', sans-serif;
-    width: 940px;
-    border-collapse: collapse;
-    border: 3px solid #0fec25;
-    margin: 10px 10px 10px 10px;
+.message-body{
+    padding: 0.3em 1.25em
 }
 </style>
+

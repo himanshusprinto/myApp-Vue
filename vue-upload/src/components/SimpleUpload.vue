@@ -31,7 +31,7 @@
 
         
         <div class="field">
-            <button class="button is-info">Send</button>
+            <button class="button is-info">Upload</button>
         </div>
     </form>
 </template>
@@ -55,7 +55,7 @@ export default {
         selectFile() {
             const file = this.$refs.file.files[0];
             const allowedTypes = ["application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"];
-            const MAX_SIZE = 10000;
+            const MAX_SIZE = 100000;
             const toolarge = file.size > MAX_SIZE;
             if(allowedTypes.includes(file.type)&& !toolarge){
                 this.file = file;
@@ -76,8 +76,9 @@ export default {
                 this.message = "File has been uploaded";
                 this.file = "";
                 this.error = false;
+        
             }catch(err){
-                this.message = err.response.data.error;
+                this.message = err.response;
                 this.error = true;
             }
         }

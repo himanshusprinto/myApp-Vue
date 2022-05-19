@@ -11,6 +11,7 @@ const singleFileUpload = async (req, res, next) => {
               parsedData.push(...tempData);
               return parsedData;
             }
+
             for(var i=0;i<convertExcelFileToJsonUsingXlsx().length;i++){
                 const file = new SingleFile({
                   _id: convertExcelFileToJsonUsingXlsx()[i]._id,
@@ -34,4 +35,24 @@ const displayData = async (req,res)=> {
         
 }  
 
-module.exports = {singleFileUpload, displayData}
+const deleteUser = (req, res)=>{
+  const id = req.params.id;
+
+  SingleFile.findByIdAndDelete(id)
+      .then(data => {
+          if(!data){
+              res.status(404).send({ message : `Cannot Delete with id ${id}. Maybe id is wrong`})
+          }else{
+              res.send({
+                  message : "User was deleted successfully!"
+              })
+          }
+      })
+      .catch(err =>{
+          res.status(500).send({
+              message: "Could not delete User with id=" + id
+          });
+      });
+}
+ 
+module.exports = {singleFileUpload, displayData, deleteUser}

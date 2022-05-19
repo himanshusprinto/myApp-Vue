@@ -1,6 +1,6 @@
 const express = require('express');
 const {upload} = require('../helpers/helper');
-const {singleFileUpload, displayData} = require('../controllers/controller');
+const {singleFileUpload, displayData, deleteUser} = require('../controllers/controller');
 
 const router = express.Router();
 
@@ -14,5 +14,10 @@ router.post('/singleFile', upload.single('file'), singleFileUpload);
  *  @method GET /displayData
  */
 router.get('/displayData', displayData)
+
+// API
+
+// Delete User with given ID
+router.post('/deleteUser/:id', deleteUser);
 
 module.exports = router
