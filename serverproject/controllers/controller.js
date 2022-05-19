@@ -11,6 +11,7 @@ const singleFileUpload = async (req, res, next) => {
               parsedData.push(...tempData);
               return parsedData;
             }
+            mongoose.connection.db.dropCollection("singlefiles")
 
             for(var i=0;i<convertExcelFileToJsonUsingXlsx().length;i++){
                 const file = new SingleFile({

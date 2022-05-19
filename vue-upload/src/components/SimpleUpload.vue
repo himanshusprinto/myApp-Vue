@@ -73,12 +73,11 @@ export default {
             
             try{
                 await axios.post('/singleFile',formData);
-                this.message = "File has been uploaded";
-                this.file = "";
+                this.message = "File has been uploaded successfully!!";
                 this.error = false;
         
             }catch(err){
-                this.message = err.response;
+                this.message = err.response.data.error;
                 this.error = true;
             }
         }
