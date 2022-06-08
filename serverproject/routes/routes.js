@@ -1,6 +1,6 @@
 const express = require('express');
 const {upload} = require('../helpers/helper');
-const {singleFileUpload, displayData, deleteUser} = require('../controllers/controller');
+const {singleFileUpload, displayData, deleteUser,signUp, signIn} = require('../controllers/controller');
 
 const router = express.Router();
 
@@ -19,5 +19,17 @@ router.get('/displayData', displayData)
 
 // Delete User with given ID
 router.post('/deleteUser/:id', deleteUser);
+
+/**
+ *  @description Register
+ *  @method POST /signup
+ */
+router.post('/signup',signUp);
+
+/**
+ *  @description Register
+ *  @method POST /signup
+ */
+ router.post('/login',signIn);
 
 module.exports = router
